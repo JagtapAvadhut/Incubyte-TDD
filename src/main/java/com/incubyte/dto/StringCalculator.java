@@ -1,18 +1,28 @@
 package com.incubyte.dto;
 
 public class StringCalculator {
-
-    public static int add(String input){
-        if(input.isEmpty()) {
+    public static int add(String input) {
+        if (input.isEmpty()) {
             return 0;
         }
-
         String delimiter = ",|\n";
+        if (input.matches("//(.*)\n(.*)")) {
+            delimiter = Character.toString(input.charAt(2));
+            input = input.substring(4);
+        }
         String[] numbers = input.split(delimiter);
         int sum = 0;
         for (String number : numbers) {
-            sum += Integer.parseInt(number);
+            int num = toInt(number);
+            if (num < 0) {
+                throw new IllegalArgumentException("Negatives not allowed: " + num);
+            }
+            sum = sum + num;
         }
         return sum;
+    }
+
+    public static int toInt(String number) {
+        return Integer.parseInt(number);
     }
 }
