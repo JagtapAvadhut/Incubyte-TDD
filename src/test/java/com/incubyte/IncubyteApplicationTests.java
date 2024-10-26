@@ -23,4 +23,9 @@ class IncubyteApplicationTests {
 		assertEquals(1, StringCalculator.add("1"));
 	}
 
+	@Test
+	public void testTwoNumbers() {
+		assertEquals(3, StringCalculator.add("1,2"));
+	}
+
 }
